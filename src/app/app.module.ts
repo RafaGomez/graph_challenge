@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { GraphContainerComponent } from './graph/containers/graph-container/graph-container.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GraphContainerComponent
   ],
   imports: [
     BrowserModule,

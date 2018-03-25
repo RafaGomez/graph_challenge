@@ -1,0 +1,21 @@
+
+<div class="login">
+  <div class="container">
+    <h1>Log in</h1>
+    <form>
+      <div class="form-group">
+        <label for="user">User</label>
+        <input type="text" class="form-control" id="user" [(ngModel)]="userName" name="user" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pwd">Password</label>
+        <input type="password" class="form-control" id="pwd" [(ngModel)]="pwd" name="pwd">
+      </div>
+
+      <button type="submit" class="btn btn-success" (click)="logIn()">Log in</button>
+
+    </form>
+    <p *ngIf="error"> User and password not valid </p>
+  </div>
+</div>
