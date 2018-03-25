@@ -9,7 +9,7 @@ import { AuthModule } from '../../auth.module';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let mockRouter = {
+  const mockRouter = {
     navigateByUrl: jasmine.createSpy('navigateByUrl')
   };
 

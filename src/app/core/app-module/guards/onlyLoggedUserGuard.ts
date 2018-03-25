@@ -12,7 +12,7 @@ class OnlyLoggedInUsersGuard implements CanActivate {
 
   }
 
-  public canActivate(): Boolean {
+  public canActivate() {
     return this.autService.getUserLogged() !== null;
   }
 }
