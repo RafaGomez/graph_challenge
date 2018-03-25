@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    GraphRoutingModule
   ],
-  declarations: [GraphRoutingModule]
+  declarations: []
 })
 export class GraphModule { }
