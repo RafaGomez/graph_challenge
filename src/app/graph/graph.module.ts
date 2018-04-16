@@ -8,6 +8,6 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     GraphRoutingModule
   ],
-  declarations: []
+  declarations: [GraphContainerComponent]
 })
 export class GraphModule { }
