@@ -1,3 +1,6 @@
-<p>
-  graph-container works!
-</p>
+  <app-graph-editor
+    [graphModel]="graph"
+    (nodeSelected)="showDetails($event)"
+    (saveRequested)="saveGraph($event)"
+    [validationErrors]="validationResult">
+  </app-graph-editor>

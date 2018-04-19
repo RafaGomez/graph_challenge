@@ -1,7 +1,7 @@
-import { Link } from './Link';
-import { Node } from './Node';
+import { ILink } from './Link';
+import { INode } from './Node';
 export interface Graph {
-  nodes: Node[];
-  links: Link[];
+  nodes: INode[];
+  links: ILink[];
   name: String;
 }
