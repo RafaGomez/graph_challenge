@@ -45,12 +45,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
     this.diagram.initialContentAlignment = go.Spot.Center;
     this.diagram.allowDrop = true;  // necessary for dragging from Palette
     this.diagram.undoManager.isEnabled = true;
-    this.diagram.addDiagramListener("ChangedSelection",
-        e => {
-          const node = e.diagram.selection.first();
-          this.nodeSelected.emit(node instanceof go.Node ? node : null);
-        });
-    this.diagram.addModelChangedListener(e => e.isTransactionFinished && this.modelChanged.emit(e));
 
     this.diagram.nodeTemplate =
       $(go.Node, "Auto",
@@ -96,7 +90,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes:SimpleChanges){
-    if (changes["graphModel"] != null)
+    console.log("changes", changes);
+    if (changes["graphModel"] != null) //Library calls ngOnChanges every time user change graph.
     {
       //Translate domain graph model into library graph model
       let nodes = [];
