@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'graph',
-    loadChildren: () => GraphModule // './graph/graph.module#GraphModule' => Fixing angular bug
+    loadChildren: './graph/graph.module#GraphModule'// => Fixing angular bug
   }
 ];
 
