@@ -1,0 +1,11 @@
+<div class="diagramsPanel">
+  <div #paletteDiv class="paletteDiv"></div>
+  <div #diagramDiv class="diagramDiv"></div>
+  <button class="save" (click)="saveGraph()" >Save</button>
+  <div class="errors" *ngIf="validationErrors?.length > 0">
+    <p>Wrong graph:</p>
+    <ul>
+      <li *ngFor="let error of validationErrors">{{error}}</li>
+    </ul>  
+  </div>
+</div>
