@@ -1,4 +1,5 @@
 # GraphChallenge
+[![Build Status](https://travis-ci.org/RafaGomez/graph_challenge.svg?branch=master)](https://travis-ci.org/RafaGomez/graph_challenge)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 
