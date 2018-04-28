@@ -12,7 +12,7 @@ import { ILink } from '../../models/Link';
 })
 export class GraphContainerComponent implements OnInit {
 
-  title = 'My First GoJS App in Angular';
+  title = 'Graph challenge';
 
   model = new go.GraphLinksModel(
     [
@@ -35,16 +35,15 @@ export class GraphContainerComponent implements OnInit {
 
   constructor( private graphService: GraphService) { }
 
-  ngOnInit() {  
+  ngOnInit() {
     let gr:Graph = this.graphService.loadGraph("test");
     if (gr == null){
       //There is no saved graph. Load a basic one
       gr = <Graph>{};
       gr.nodes = [<INode>{name:"start", description:"start",type:NodeTypeEnum.Init}, {name:"end", description:"end", type:NodeTypeEnum.End}];
-      gr.links = [<ILink>{start:"start", end:"end"}];      
+      gr.links = [<ILink>{start:"start", end:"end"}];
       gr.name = "test";
     }
-    console.log("loaded graph", gr);
     this.showDetails(gr);
   }
 
@@ -52,14 +51,14 @@ export class GraphContainerComponent implements OnInit {
   showDetails(graph: Graph | null) {
     this.graph = graph;
   }
-  
+
 
   saveGraph(graph: Graph){
     this.validationResult = this.graphService.validateGraph(graph);
     if (this.validationResult.length == 0){
       this.graphService.saveGraph(graph);
     }
-    
+
     console.log("Validation", this.validationResult);
   }
 
