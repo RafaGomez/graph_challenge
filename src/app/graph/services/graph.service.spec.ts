@@ -21,14 +21,14 @@ describe('GraphService', () => {
       name: 'correct graph',
       nodes: [{name: 'start', type: NodeTypeEnum.Init, description:'start'},
       {name: 'condition', type: NodeTypeEnum.Condition, description:'condition'},
-              {name: 'action1', type: NodeTypeEnum.Action, description:'action 1'},              
+              {name: 'action1', type: NodeTypeEnum.Action, description:'action 1'},
               {name: 'action2', type: NodeTypeEnum.Action, description:'action 2'},
               {name: 'end', type: NodeTypeEnum.End, description:'end'}],
       links: [{start: 'start', end: 'condition'},
-              {start: 'condition', end: 'action 1'},
-              {start: 'condition', end: 'action 2'},
-              {start: 'action 1', end: 'end'}, 
-              {start: 'action 2', end: 'end'}]
+              {start: 'condition', end: 'action1'},
+              {start: 'condition', end: 'action2'},
+              {start: 'action1', end: 'end'},
+              {start: 'action2', end: 'end'}]
     };
     expect(service.validateGraph(okGraph).length).toBe(0);
   }));
@@ -63,10 +63,12 @@ describe('GraphService', () => {
     expect(service).toBeTruthy();
     const okGraph: Graph = {
       name: 'error graph',
-      nodes: [{name: 'start', type: NodeTypeEnum.Init, description:'start'},
-              {name: 'end', type: NodeTypeEnum.End, description:'end'},
-              {name: 'isolated', type: NodeTypeEnum.Action, description:'isolated'}],
-      links: [{start: 'start', end: 'end'}]
+      nodes: [{name: 'start', type: NodeTypeEnum.Init, description: 'start'},
+              {name: 'action', type: NodeTypeEnum.Action, description: 'action'},
+              {name: 'end', type: NodeTypeEnum.End, description: 'end'},
+              {name: 'isolated', type: NodeTypeEnum.Condition, description: 'isolated'}],
+      links: [{start: 'start', end: 'action'},
+              {start: 'action', end: 'end'}]
     };
     expect(service.validateGraph(okGraph).length).toBeGreaterThan(0);
   }));
@@ -90,14 +92,14 @@ describe('GraphService', () => {
       name: 'correct graph',
       nodes: [{name: 'start', type: NodeTypeEnum.Init, description:'start'},
       {name: 'condition', type: NodeTypeEnum.Condition, description:'condition'},
-              {name: 'action1', type: NodeTypeEnum.Action, description:'action 1'},              
+              {name: 'action1', type: NodeTypeEnum.Action, description:'action 1'},
               {name: 'action2', type: NodeTypeEnum.Action, description:'action 2'},
               {name: 'end', type: NodeTypeEnum.End, description:'end'}],
       links: [{start: 'start', end: 'condition'},
-              {start: 'condition', end: 'action 1'},
-              {start: 'condition', end: 'action 2'},
-              {start: 'action 1', end: 'end'}, 
-              {start: 'action 2', end: 'end'}]
+              {start: 'condition', end: 'action1'},
+              {start: 'condition', end: 'action2'},
+              {start: 'action1', end: 'end'},
+              {start: 'action2', end: 'end'}]
     };
     expect(service.saveGraph(okGraph)).toBe(true);
     expect(service.loadGraph(okGraph.name.toString())).toBeDefined();
