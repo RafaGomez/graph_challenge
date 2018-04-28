@@ -22,12 +22,10 @@ export class GraphEditorComponent implements OnInit, OnChanges {
 
   @Input()
   graphModel: Graph;
-  //get model(): go.Model { return this.diagram.model; }
-  //set model(val: go.Model) { this.diagram.model = val; }
 
   @Input()
   validationErrors: String[];
-  
+
   @Output()
   nodeSelected = new EventEmitter<go.Node|null>();
 
@@ -90,7 +88,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes:SimpleChanges){
-    console.log("changes", changes);
     if (changes["graphModel"] != null) //Library calls ngOnChanges every time user change graph.
     {
       //Translate domain graph model into library graph model
@@ -99,8 +96,8 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         nodes.push({
           key: nod.name,
           text: nod.description,
-          color: "orange" //TODO: Change color for each node type.
-        })
+          color: this.getColorFromType(nod.type)
+        });
       });
 
       let links = [];
@@ -111,7 +108,6 @@ export class GraphEditorComponent implements OnInit, OnChanges {
         });
       });
       this.model = new go.GraphLinksModel(nodes, links);
-      console.log("model =>", this.model);
       this.diagram.model = this.model;
       this.diagram.div = this.diagramRef.nativeElement;
       this.palette.div = this.paletteRef.nativeElement;
@@ -120,13 +116,12 @@ export class GraphEditorComponent implements OnInit, OnChanges {
   }
 
   saveGraph(){
-    //Translate library graph model into domain graph model    
-    console.log ("model", this.diagram.model);
+    //Translate library graph model into domain graph model
     let gr = <Graph> {};
     gr.nodes = this.diagram.model.nodeDataArray.map(val => <INode>{
       name: val["key"],
-      type: NodeTypeEnum.Action,
-      description: val["text"] 
+      type: this.getTypeFromColor(val["color"]),
+      description: val["text"]
     });
 
     gr.links = this.diagram.model["linkDataArray"].map(val => <ILink>{
@@ -134,9 +129,52 @@ export class GraphEditorComponent implements OnInit, OnChanges {
       end: val.to
     });
     gr.name = "test";
-  
+
     this.saveRequested.emit(gr);
   }
 
+  private getTypeFromColor (color: string): NodeTypeEnum{
+    let result: NodeTypeEnum;
+    switch (color) {
+      case "lightblue":
+        result = NodeTypeEnum.Init;
+        break;
+      case "orange":
+        result = NodeTypeEnum.End;
+        break;
+      case "lightgreen":
+        result = NodeTypeEnum.Action;
+        break;
+      case "pink":
+        result = NodeTypeEnum.Condition;
+        break;
+      default:
+        result = NodeTypeEnum.Action;
+        break;
+    }
+    return result;
+  }
+
+  private getColorFromType (type: NodeTypeEnum): string {
+    let result: string;
+    switch (type) {
+      case NodeTypeEnum.Init:
+        result = 'lightblue';
+        break;
+      case NodeTypeEnum.End:
+        result = 'orange';
+        break;
+      case NodeTypeEnum.Action:
+        result = 'lightgreen';
+        break;
+      case NodeTypeEnum.Condition:
+        result = 'pink';
+        break;
+      default:
+        result = 'lightgreen';
+        break;
+    }
+    return result;
+  }
 
 }
