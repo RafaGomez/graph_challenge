@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {CanActivate} from '@angular/router';
 
 @Injectable()
-class OnlyLoggedInUsersGuard implements CanActivate {
+export class OnlyLoggedInUsersGuard implements CanActivate {
 
   /**
    *

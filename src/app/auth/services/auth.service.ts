@@ -8,7 +8,7 @@ import { Subject } from 'rxjs/Subject';
 export class AuthService {
 
 
-  private userLogged: User;
+  private userLogged: User = null;
   /** Fires an event everytime a user logs in or logs out */
   private userLogged$: Subject<User>;
 
